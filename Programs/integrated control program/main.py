@@ -141,23 +141,32 @@ class Device():
 			return False
 
 
-def robot_command(key, move:DobotApiMove, dashboard:DobotApiDashboard, feed: DobotApi, arduino:Device):
+
+
+
+
+
+
+def robot_command(key, move:DobotApiMove, dashboard:DobotApiDashboard, feed: DobotApi, arduino:Device, speed = 50, acceleration = 50, angular_move_rate = 1.0):
+        dashboard.SpeedFactor(speed)
+        dashboard.AccJ(acceleration)
+
         if key == "up":
             print("going up")
-            move.RelJointMovJ(0, 0, 0, -15, 0, 0)
-            sleep(1)
+            move.RelJointMovJ(0, 0, 0, -1*angular_move_rate, 0, 0)
+            sleep(0.3)
         elif key == "down":
             print("going down")
-            move.RelJointMovJ(0, 0, 0, 15, 0, 0)
-            sleep(1)
+            move.RelJointMovJ(0, 0, 0, 1*angular_move_rate, 0, 0)
+            sleep(0.3)
         elif key == "left":
             print("going left")
-            move.RelJointMovJ(0, 0, 0, 0, -15, 0)
-            sleep(1)
+            move.RelJointMovJ(0, 0, 0, 0, -1*angular_move_rate, 0)
+            sleep(0.3)
         elif key == "right":
             print("going right")
-            move.RelJointMovJ(0, 0, 0, 0, 15, 0)
-            sleep(1)
+            move.RelJointMovJ(0, 0, 0, 0, 1*angular_move_rate, 0)
+            sleep(0.3)
 
         elif key == "grab":
             print("grabbing")
